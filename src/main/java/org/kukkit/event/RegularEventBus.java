@@ -1,6 +1,7 @@
 package org.kukkit.event;
 
 import org.apache.logging.log4j.LogManager;
+import org.kukkit.event.defaults.KukkitInitializationEvent;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -31,7 +32,7 @@ public class RegularEventBus implements EventBus {
             Class<?> listenerClass = listener.getClass();
             for (Method method : listenerClass.getDeclaredMethods()) {
                 if (method.isAnnotationPresent(BusListener.class)) {
-                    for (Class<?> parameter : method.getExceptionTypes()) {
+                    for (Class<?> parameter : method.getParameterTypes()) {
                         if (parameter.getName().equals(event.getClass().getName())) {
                             try {
                                 method.invoke(listener, event);
@@ -43,6 +44,21 @@ public class RegularEventBus implements EventBus {
                     }
                 }
             }
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Starting regular event bus...");
+        RegularEventBus regularEventBus = new RegularEventBus();
+        regularEventBus.register(new TestListener());
+        regularEventBus.callEvent(new KukkitInitializationEvent());
+        System.out.println("Test end!");
+    }
+
+    private static class TestListener {
+        @BusListener
+        public void onTest(KukkitInitializationEvent e) {
+            System.out.println("Works!");
         }
     }
 }
