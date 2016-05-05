@@ -1,5 +1,6 @@
 package org.kukkit.world;
 
+import org.kukkit.entity.BaseEntity;
 import org.kukkit.ext.Position;
 
 /**
@@ -7,7 +8,6 @@ import org.kukkit.ext.Position;
  *
  * @since 1.0-SNAPSHOT
  * @author PizzaCrust
- * TODO: Add spawnEntity(BaseEntity entity)
  */
 public interface World {
     /**
@@ -60,4 +60,10 @@ public interface World {
      * @param flag the boolean
      */
     void pvp(boolean flag);
+
+    /**
+     * Spawns an entity inside of the world.
+     * @param baseEntity the entity
+     */
+    void spawnEntity(BaseEntity baseEntity);
 }
