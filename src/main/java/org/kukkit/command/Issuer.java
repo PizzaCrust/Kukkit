@@ -1,13 +1,14 @@
 package org.kukkit.command;
 
+import org.kukkit.permission.Ordered;
+
 /**
  * Represents an entity that can issue commands.
  *
  * @since 1.0-SNAPSHOT
  * @author PizzaCrust
- * TODO: Implement the 'Ordered' interface, after the permission API's addition.
  */
-public interface Issuer {
+public interface Issuer extends Ordered {
     /**
      * Sends a message to the issuer.
      * @param message the message
